@@ -13,7 +13,7 @@ public class UserController {
 
     @PostMapping("/api/registration")
     public String getHome(@RequestBody UserDto userDto) {
-        userService.save(User.entityToUser(userDto));
+        userService.save(new User(userDto.getUsername(), userDto.getPassword(), userDto.getFirstName(), userDto.getLastName()));
         return "home";
     }
 }
