@@ -11,17 +11,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class UserController {
 
-  @Autowired
-  private UserService userService;
+    @Autowired
+    private UserService userService;
 
-  @PostMapping("/api/registration")
-  @ResponseStatus(HttpStatus.CREATED)
-  public void getHome(@RequestBody UserDto userDto) {
-    userService.save(new User(userDto.getUsername(), userDto.getPassword(), userDto.getFirstName(), userDto.getLastName()));
-  }
+    @PostMapping("/api/registration")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void saveUser(@RequestBody UserDto userDto) {
+        userService.save(new User(userDto.getUsername(), userDto.getPassword(), userDto.getFirstName(), userDto.getLastName()));
+    }
 
-  @PostMapping("/api/message")
-  public Message createAnswer(@RequestBody String string) {
-    return new Message(string);
-  }
 }
