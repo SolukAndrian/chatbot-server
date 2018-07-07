@@ -6,16 +6,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.logging.Logger;
-
 @RestController
 public class BotController {
-    @Autowired
-    private BotService botService;
 
-    @PostMapping("/api/messages")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void sendResponseToBot(@RequestBody Activity activity) {
-        botService.interactWithBot(activity);
-    }
+  @Autowired
+  private BotService botService;
+
+  @PostMapping("/api/messages")
+  @ResponseStatus(HttpStatus.ACCEPTED)
+  public Activity sendResponseToBot(@RequestBody Activity activity) {
+    return botService.interactWithBot(activity);
+  }
 }
