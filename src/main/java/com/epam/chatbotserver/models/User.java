@@ -11,6 +11,7 @@ import javax.persistence.*;
 @ToString
 @NoArgsConstructor
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -26,7 +27,10 @@ public class User {
         this.lastName = lastName;
     }
 
-    public static User entityToUser(UserDto userDto){
-        return new User(userDto.getUsername(), userDto.getPassword(), userDto.getFirstName(), userDto.getLastName());
+    public User(UserDto userDto) {
+        this.username = userDto.getUsername();
+        this.password = userDto.getPassword();
+        this.lastName = userDto.getLastName();
+        this.firstName = userDto.getFirstName();
     }
 }
