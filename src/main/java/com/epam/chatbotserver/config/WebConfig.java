@@ -14,7 +14,6 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import java.util.Properties;
 
 @Configuration
-@EnableWebMvc
 @ComponentScan("com.epam.chatbotserver")
 @PropertySource("classpath:mail/email.properties")
 public class WebConfig implements WebMvcConfigurer {
