@@ -36,6 +36,7 @@ public class MailServiceImpl implements MailService {
 
     @Override
     public void send(String email) {
+        final String key = getRandomKey();
         User user = userRepository.findByUsername(email);
         MimeMessage mimeMessage = javaMailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage);
@@ -43,7 +44,7 @@ public class MailServiceImpl implements MailService {
             mimeMessage.setFrom(new InternetAddress("andrianlarson@gmail.com"));
             mimeMessage.setSubject("Epam support group!");
             helper.setTo(user.getUsername());
-            helper.setText("Hello " + user.getUsername() + " it is your temp password " + getRandomKey(), true);
+            helper.setText("Hello " + user.getUsername() + " it is your temp password " + key +"<br><br>To activate new password, go to link below:<br>"+ "<a href='http://localhost:3978/api/message/set/temp/password?password=" + key + "&email=" + user.getUsername() + "'>/api/message/set/temp/password</a>", true);
         } catch (MessagingException e) {
             e.printStackTrace();
         }

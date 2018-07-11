@@ -25,8 +25,16 @@ public class UserController {
 
     @GetMapping("/api/message/key")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void sendKey(@RequestParam("email") String email){
+    public void sendKey(@RequestParam("email") String email) {
         mailService.send(email);
     }
 
+    @GetMapping("/api/message/set/temp/password")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void setKey(@RequestParam("password") String password, @RequestParam("email") String email) {
+        System.out.println(password+" "+email);
+        User user = userService.findByUsername(email);
+        user.setPassword(password);
+        userService.save(user);
+    }
 }
